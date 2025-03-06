@@ -92,30 +92,42 @@ class PerroController extends Controller
         $perro2 = Perro::find($idPerro2);
         $sexoCachorro;
 
-        if($perro1->peso == $perro2->peso){
+        //comprobación sexo perros
+        if($perro1->sexo == $perro2->sexo ){
 
             return view('perro.errorCruce');
 
-        }else{
-          
-
-            if(strlen($perro1->nombre) > strlen($perro2->nombre)){
-                $sexoCachorro = $perro1->sexo;
-            }
-            else{
-                $sexoCachorro = $perro2->sexo;
-
-            }
-
-            $perro = new Perro();
-            $perro->nombre = $perro1->nombre . "Junior";
-            $perro->raza = $perro2->raza;
-            $perro->color = $perro2->color;
-            $perro->peso = 1;
-            $perro->sexo = $sexoCachorro;
-            $perro->save();
-
-            return redirect('perros');
         }
+        else{
+
+            if($perro1->peso == $perro2->peso){
+
+                return view('perro.errorCruce');
+    
+            }else{
+              
+    
+                if(strlen($perro1->nombre) > strlen($perro2->nombre)){
+                    $sexoCachorro = $perro1->sexo;
+                }
+                else{
+                    
+                    $sexoCachorro = $perro2->sexo;
+    
+                }
+    
+                $perro = new Perro();
+                $perro->nombre = $perro1->nombre . "Junior";
+                $perro->raza = $perro2->raza;
+                $perro->color = $perro2->color;
+                $perro->peso = 1;
+                $perro->sexo = $sexoCachorro;
+                $perro->save();
+    
+                return redirect('perros');
+            }
+
+        }
+        
 }
 }
